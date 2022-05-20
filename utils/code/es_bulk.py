@@ -56,7 +56,7 @@ def bulk_json_data(data_file, index, doc_type):
 
 
 if __name__ == '__main__':
-    es_client = Elasticsearch([{'host': '202.191.57.62', 'port': 9200}])
+    es_client = Elasticsearch([{'host': 'localhost', 'port': 9200}])
 
     # Take1:
     # Load all json data to lsit

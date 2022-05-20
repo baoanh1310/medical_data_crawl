@@ -11,7 +11,7 @@ def getListRecords(df_file):
     return df_final.to_dict("records")
 
 if __name__ == '__main__':
-    MONGODB_URI = "mongodb://admin:admin@54.150.126.18:27017"
+    MONGODB_URI = "mongodb://localhost:27017"
     MONGODB_DATABASE = 'CRAWLER_MEDICAL_DATA'
     CRAWLER_COLLECTION = "DRUGBANKVN"
 
