@@ -12,8 +12,8 @@ def getListRecords(df_file):
 
 if __name__ == '__main__':
     MONGODB_URI = "mongodb://localhost:27017"
-    MONGODB_DATABASE = 'CRAWLER_MEDICAL_DATA'
-    CRAWLER_COLLECTION = "DRUGBANKVN"
+    MONGODB_DATABASE = 'vaipeapis'
+    CRAWLER_COLLECTION = "drugs"
 
     connection = MongoClient(MONGODB_URI)
     db = connection[MONGODB_DATABASE]

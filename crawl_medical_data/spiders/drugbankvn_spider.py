@@ -12,7 +12,7 @@ class DrugBankVNSpider(CrawlSpider):
         super(DrugBankVNSpider, self).__init__(**kwargs)
         self.allowed_domains = ['drugbank.vn/']
         self.start_urls =  ['https://drugbank.vn/']
-        settings['CRAWLER_COLLECTION'] = 'DRUGBANK'
+        settings['CRAWLER_COLLECTION'] = 'drugs'
 
 
     def start_requests(self):

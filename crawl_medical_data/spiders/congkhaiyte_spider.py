@@ -12,7 +12,7 @@ class CongKhaiYTeSpider(CrawlSpider):
         super(CongKhaiYTeSpider, self).__init__(**kwargs)
         self.allowed_domains = ['congkhaiyte.moh.gov.vn']
         self.start_url =  ['https://congkhaiyte.moh.gov.vn/']
-        settings['CRAWLER_COLLECTION'] = 'CONGKHAIYTE'
+        settings['CRAWLER_COLLECTION'] = 'congkhaiyte'
 
 
     def start_requests(self):

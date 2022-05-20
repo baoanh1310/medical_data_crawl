@@ -17,8 +17,8 @@ def convertColumnToNumeric(col):
 
 if __name__ == '__main__':
     MONGODB_URI = "mongodb://localhost:27017"
-    MONGODB_DATABASE = 'CRAWLER_MEDICAL_DATA'
-    CRAWLER_COLLECTION = "DRUGSCLEAN"
+    MONGODB_DATABASE = 'vaipeapis'
+    CRAWLER_COLLECTION = "drugsclean"
 
     connection = MongoClient(MONGODB_URI)
     db = connection[MONGODB_DATABASE]

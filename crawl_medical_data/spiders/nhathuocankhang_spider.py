@@ -13,7 +13,7 @@ class NhaThuocAnKhangSpider(CrawlSpider):
         super(NhaThuocAnKhangSpider, self).__init__(**kwargs)
         self.allowed_domains = ['nhathuocankhang.com']
         self.start_url =  ['https://www.nhathuocankhang.com']
-        settings['CRAWLER_COLLECTION'] = 'NHATHUOCANKHANG'
+        settings['CRAWLER_COLLECTION'] = 'nhathuocankhang'
 
 
     def start_requests(self):

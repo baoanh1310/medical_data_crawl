@@ -25,7 +25,7 @@ FEED_EXPORT_ENCODING = 'utf-8'
 
 TOR_HOST = '127.0.0.1'
 TOR_PORT = 9050
-MONGODB_URI = 'mongodb://admin:admin@54.150.126.18:27017'
+MONGODB_URI = 'mongodb://localhost:27017'
 
 # proxy for polipo
 # HTTP_PROXY = 'http://127.0.0.1:8123'
