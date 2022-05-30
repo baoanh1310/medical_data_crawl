@@ -6,14 +6,14 @@ from datetime import datetime
 
 def getListRecords(df_file):
     df = pd.read_csv(df_file)
-    df.drop(columns=['Unnamed: 0'], axis=1, inplace=True)
+    df.drop(columns=['Unnamed: 0.1'], axis=1, inplace=True)
     df_final = df.fillna('')
     return df_final.to_dict("records")
 
 if __name__ == '__main__':
     MONGODB_URI = "mongodb://localhost:27017"
     MONGODB_DATABASE = 'vaipeapis'
-    CRAWLER_COLLECTION = "drugs"
+    CRAWLER_COLLECTION = "drugsbank"
 
     connection = MongoClient(MONGODB_URI)
     db = connection[MONGODB_DATABASE]
