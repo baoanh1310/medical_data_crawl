@@ -1,7 +1,7 @@
 import os
 import pandas as pd
 
-filepath = '../data/drugbank_clean.csv'
+filepath = './drugbank_clean.csv'
 df = pd.read_csv(filepath)
 
 new_df = pd.DataFrame()
@@ -23,4 +23,4 @@ new_df['drugType'] = df['nhomThuoc']
 new_df['drugNum'] = df['soQuyetDinh']
 
 # print(new_df.columns)
-new_df.to_csv('../data/drugs.csv')
+new_df.to_csv('./drugs.csv')

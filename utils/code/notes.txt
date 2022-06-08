@@ -1,0 +1,13 @@
+merge_csv.py
+
+test.py
+
+insert_mongo.py
+
+read_drugs_mongo.py
+
+curl -s -H "Content-Type: application/x-ndjson" -XPOST localhost:9200/_bulk --data-binary "@drugs.json";
+
+- Change mongo 'database.drugs' table -> 'drugs' table
+
+drug_name_search_api.py
