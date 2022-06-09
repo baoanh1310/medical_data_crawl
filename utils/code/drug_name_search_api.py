@@ -16,17 +16,48 @@ def index():
     return jsonify(results['_source'])
 
 
-@app.route('/search', methods=['GET'])
-def search_drug_with_name(size_query=100):
+@app.route('/suggest', methods=['GET'])
+def suggest_drug_with_name(size_query=100):
     args = request.args
     name = args.get('name')
-    query = {"size": size_query, "query": {"match": {"drugName": '.*{}.*'.format(name)}}}
+    query = {"size": size_query, "query": {"match": {"drugName": '{}*'.format(name)}}}
 
     match_docs = es.search(
         body=query, index="drugs", doc_type='_doc')
     if match_docs['hits']['total']['value'] > 0:
         docs = [doc['_source'] for doc in match_docs['hits']['hits']]
         docs = [{ "drugId": doc["drugId"], "drugName": doc["drugName"] } for doc in docs]
+        
+        res = {
+            "appStatus": 200,
+            "data": {
+                "result": {
+                    "values": docs 
+                }
+            }
+        }
+        return res
+
+    return {
+            "appStatus": 200,
+            "data": {
+                "result": {
+                    "values": [] 
+                }
+            }
+        }
+
+@app.route('/search', methods=['GET'])
+def search_drug_with_name(size_query=100):
+    args = request.args
+    name = args.get('name')
+    query = {"size": size_query, "query": {"match": {"drugName": '{}*'.format(name)}}}
+
+    match_docs = es.search(
+        body=query, index="drugs", doc_type='_doc')
+    if match_docs['hits']['total']['value'] > 0:
+        docs = [doc['_source'] for doc in match_docs['hits']['hits']]
+        # docs = [{ "drugId": doc["drugId"], "drugName": doc["drugName"] } for doc in docs]
         
         res = {
             "appStatus": 200,
