@@ -78,4 +78,4 @@ def search_drug_with_name(size_query=100):
             }
         }
 
-app.run(host='0.0.0.0', port=5757, debug=True)
+app.run(host='0.0.0.0', port=5757, debug=False)
