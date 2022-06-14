@@ -20,7 +20,37 @@ def index():
 def suggest_drug_with_name(size_query=100):
     args = request.args
     name = args.get('name')
-    query = {"size": size_query, "query": {"match": {"drugName": '{}*'.format(name)}}}
+    value = "{}.*".format(name)
+
+    query = {
+        "query": {
+            "bool": {
+                "must": [
+                    {
+                        "match_phrase_prefix": {
+                            "drugName": {
+                                "query": "{}.".format(name)
+                            }
+                        }
+                    }
+                ],
+                "filter": [],
+                "should": [],
+                "must_not": []
+            }
+        },
+        "aggs": {
+            "auto_complete": {
+                "terms": {
+                    "field": "name.keyword",
+                    "order": {
+                        "_count": "desc"
+                    },
+                    "size": 8
+                }
+            }
+        }
+    }
 
     match_docs = es.search(
         body=query, index="drugs", doc_type='_doc')
@@ -51,8 +81,36 @@ def suggest_drug_with_name(size_query=100):
 def search_drug_with_name(size_query=100):
     args = request.args
     name = args.get('name')
-    query = {"size": size_query, "query": {"match": {"drugName": '{}*'.format(name)}}}
-
+    # query = {"size": size_query, "query": {"match": {"drugName": '{}.*'.format(name)}}}
+    query = {
+        "query": {
+            "bool": {
+                "must": [
+                    {
+                        "match_phrase_prefix": {
+                            "drugName": {
+                                "query": "{}.".format(name)
+                            }
+                        }
+                    }
+                ],
+                "filter": [],
+                "should": [],
+                "must_not": []
+            }
+        },
+        "aggs": {
+            "auto_complete": {
+                "terms": {
+                    "field": "name.keyword",
+                    "order": {
+                        "_count": "desc"
+                    },
+                    "size": 8
+                }
+            }
+        }
+    }
     match_docs = es.search(
         body=query, index="drugs", doc_type='_doc')
     if match_docs['hits']['total']['value'] > 0:
@@ -78,4 +136,4 @@ def search_drug_with_name(size_query=100):
             }
         }
 
-app.run(host='0.0.0.0', port=5757, debug=False)
+app.run(host='0.0.0.0', port=5757, debug=True)

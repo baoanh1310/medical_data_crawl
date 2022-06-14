@@ -3,5 +3,10 @@ Content-Type: application/json
 
 ###
 
-GET http://103.226.249.176:5757/search?name=a
+GET http://103.226.249.176:5757/suggest?name=De
+Content-Type: application/json
+
+###
+
+GET http://103.226.249.176:5757/search?name=Viagra
 Content-Type: application/json
