@@ -21,39 +21,18 @@ def suggest_drug_with_name(size_query=100):
     args = request.args
     name = args.get('name')
     value = "{}.*".format(name)
-
     query = {
         "query": {
-            "bool": {
-                "must": [
-                    {
-                        "match_phrase_prefix": {
-                            "drugName": {
-                                "query": "{}.".format(name)
-                            }
-                        }
-                    }
-                ],
-                "filter": [],
-                "should": [],
-                "must_not": []
-            }
-        },
-        "aggs": {
-            "auto_complete": {
-                "terms": {
-                    "field": "name.keyword",
-                    "order": {
-                        "_count": "desc"
-                    },
-                    "size": 8
+            "match_phrase_prefix": {
+                "drugName": {
+                    "query": "{}.".format(name)
                 }
             }
         }
     }
 
-    match_docs = es.search(
-        body=query, index="drugs", doc_type='_doc')
+    # match_docs = es.search(body=query, index="drugs", doc_type='_doc')
+    match_docs = es.search(body=query, index="drugs")
     if match_docs['hits']['total']['value'] > 0:
         docs = [doc['_source'] for doc in match_docs['hits']['hits']]
         docs = [{ "drugId": doc["drugId"], "drugName": doc["drugName"] } for doc in docs]
@@ -111,8 +90,8 @@ def search_drug_with_name(size_query=100):
             }
         }
     }
-    match_docs = es.search(
-        body=query, index="drugs", doc_type='_doc')
+    # match_docs = es.search(body=query, index="drugs", doc_type='_doc')
+    match_docs = es.search(body=query, index="drugs")
     if match_docs['hits']['total']['value'] > 0:
         docs = [doc['_source'] for doc in match_docs['hits']['hits']]
         # docs = [{ "drugId": doc["drugId"], "drugName": doc["drugName"] } for doc in docs]
